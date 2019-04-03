@@ -96,7 +96,7 @@ def lgb_model(X_train, y_train, X_val, y_val, save_file, folds, param_comb, n_jo
 
 
 folds = 10
-param_comb = 100
+param_comb = 50
 n_jobs = -1
 scoring = "roc_auc"
 
