@@ -2,3 +2,6 @@ Data/
 Data.zip
 best_lgb.pkl
 lgb_submit.csv
+lgb_submit5000.csv
+xgb_submit.csv
+titanic.ipynb

@@ -3,7 +3,7 @@ import os
 from sklearn.externals import joblib
 import scipy.stats as ss
 from sklearn.model_selection import train_test_split, StratifiedKFold, RandomizedSearchCV
-from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, classification_report
+# from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, classification_report
 from sklearn.ensemble import RandomForestClassifier
 from xgboost.sklearn import XGBClassifier
 from lightgbm.sklearn import LGBMClassifier
@@ -105,9 +105,9 @@ model_rf = rf_model(X_train, y_train, 'rf.pkl', folds, param_comb, n_jobs, scori
 model_lgb = lgb_model(X_train, y_train, X_val, y_val, 'lgb.pkl', folds, param_comb, n_jobs, scoring)
 
 # ### Optional
-# model_xgb = joblib.load(os.path.join(os.path.dirname(__file__), 'xgb.sav'))
+# model_xgb = joblib.load(os.path.join(os.path.dirname(__file__), 'best_xgb.pkl'))
 # model_rf = joblib.load(os.path.join(os.path.dirname(__file__), 'rf.sav'))
-# model_lgb = joblib.load(os.path.join(os.path.dirname(__file__), 'lgb.sav'))
+# model_lgb = joblib.load(os.path.join(os.path.dirname(__file__), 'best_lgb.pkl'))
 
 XGB_predictions = model_xgb.predict_proba(X_test)[:, 1]
 RF_predictions = model_rf.predict_proba(X_test)[:, 1]
@@ -118,7 +118,6 @@ predictions = {"xgb": XGB_predictions,
                "rf": RF_predictions,
                "lgb": LGB_predictions,
                "ensemble": ensemble_prediction}
-
 for pred in predictions:
     df = pd.DataFrame({"ID_code": ID_code,
                        "target": predictions[pred]})
